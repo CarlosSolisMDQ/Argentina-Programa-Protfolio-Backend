@@ -101,11 +101,15 @@ public class PortfolioController {
 //    }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/about/crear")
+    public String createAbout(@RequestBody About about) throws Exception {
+        interAbout.saveAbout(about);
+        return "about agregado correctamente";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/education/crear")
     public String createEducation(@RequestBody Education education) throws Exception {
-
-
-
         interEducation.saveEducation(education);
         return "educacion agregada correctamente";
     }
@@ -129,6 +133,14 @@ public class PortfolioController {
     }
 
     //bloque de peticiones delete
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/about/borrar/{id}")
+    public String deleteAbout(@PathVariable Long id){
+        interAbout.deleteAbout(id);
+        return "about borrada exitosamente";
+    }
+
+
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/education/borrar/{id}")
     public String deleteEducation(@PathVariable Long id){
@@ -209,7 +221,7 @@ public class PortfolioController {
         return experienceResult;
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/edit/projects/{id}")
+    @PutMapping("/edit/project/{id}")
     public Project editProject(@PathVariable Long id, @RequestParam ("nombre") String nombre,
                                @RequestParam ("descripcion") String descripcion,
                                @RequestParam ("imageURL") String imageURL
