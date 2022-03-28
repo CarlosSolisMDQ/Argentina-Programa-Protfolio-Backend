@@ -278,9 +278,9 @@ public class PortfolioController {
         if(!portada.equals("") && !foto.equals("") ){
             imagesResult.setPortada(portada);
             imagesResult.setFoto(foto);
-        } else if (portada.equals("")){
+        } else if (!portada.equals("")){
             imagesResult.setPortada(portada);
-        } else if (foto.equals("")){
+        } else if (!foto.equals("")){
             imagesResult.setFoto(foto);
         }
         interImages.saveUiPortfolioimages(imagesResult);
