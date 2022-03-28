@@ -12,6 +12,9 @@ import javax.persistence.Id;
 @Entity
 public class User {
 
+    //queda obsoleto porque mudo a una carpeta de seguridad que va a manejar los usuarios y autenticaciones
+
+
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
