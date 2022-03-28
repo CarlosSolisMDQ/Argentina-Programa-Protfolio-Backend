@@ -45,6 +45,9 @@ public class PortfolioController {
     @Autowired
     private UserService interUser;
 
+    @Autowired
+    private UiPortfolioImagesService interImages;
+
 //bloque de peticiones get
 
     @GetMapping("/about")
@@ -77,6 +80,10 @@ public class PortfolioController {
     public List<Skill> getSkill() {
         return interSkill.getSkill();
     }
+
+    @GetMapping("/images")
+    @ResponseBody
+    public List<UiPortfolioimages> getImages()  { return interImages.getUiPortfolioimages(); };
 
 
 //bloque de peticiones post
@@ -130,6 +137,13 @@ public class PortfolioController {
     public String createSkill(@RequestBody Skill skill) throws Exception {
         interSkill.saveSkill(skill);
         return "skill creada correctamente";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/images/crear")
+    public String createImages(@RequestBody UiPortfolioimages uiPortfolioimages) throws Exception {
+        interImages.saveUiPortfolioimages(uiPortfolioimages);
+        return "imagenes actualizadas";
     }
 
     //bloque de peticiones delete
@@ -253,6 +267,26 @@ public class PortfolioController {
         interSkill.saveSkill(skillResult);
 
         return skillResult;
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/edit/images/{id}")
+    public UiPortfolioimages editImages(@PathVariable Long id,
+                                        @RequestParam ("portada") String portada,
+                                        @RequestParam ("foto") String foto){
+        UiPortfolioimages imagesResult = interImages.findUiPortfolioimages(id);
+        if(portada.equals("") && foto.equals("") ){
+            imagesResult.setPortada(portada);
+            imagesResult.setFoto(foto);
+        } else if (portada.equals("")){
+            imagesResult.setPortada(portada);
+        } else if (foto.equals("")){
+            imagesResult.setFoto(foto);
+        }
+        interImages.saveUiPortfolioimages(imagesResult);
+
+        return imagesResult;
+
     }
 
     //aqui pongo la funcion para obtener el token de login
