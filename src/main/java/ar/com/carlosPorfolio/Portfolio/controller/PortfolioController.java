@@ -275,7 +275,7 @@ public class PortfolioController {
                                         @RequestParam ("portada") String portada,
                                         @RequestParam ("foto") String foto){
         UiPortfolioimages imagesResult = interImages.findUiPortfolioimages(id);
-        if(portada.equals("") && foto.equals("") ){
+        if(!portada.equals("") && !foto.equals("") ){
             imagesResult.setPortada(portada);
             imagesResult.setFoto(foto);
         } else if (portada.equals("")){
