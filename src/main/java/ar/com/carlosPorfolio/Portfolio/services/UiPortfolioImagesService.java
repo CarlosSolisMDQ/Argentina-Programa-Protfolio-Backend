@@ -3,9 +3,11 @@ package ar.com.carlosPorfolio.Portfolio.services;
 import ar.com.carlosPorfolio.Portfolio.models.UiPortfolioimages;
 import ar.com.carlosPorfolio.Portfolio.repository.UiPortfolioImagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UiPortfolioImagesService implements IUIPortfolioImagesService{
 
     @Autowired
