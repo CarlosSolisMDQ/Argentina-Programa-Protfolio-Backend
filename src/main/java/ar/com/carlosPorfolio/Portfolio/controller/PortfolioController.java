@@ -163,9 +163,9 @@ public class PortfolioController {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/experience/borrar/{id}")
-    public String deleteExperience(@PathVariable Long id){
+    public void deleteExperience(@PathVariable Long id){
         interExperience.deleteExperience(id);
-        return "experiencia borrada exitosamente";
+        //return "experiencia borrada exitosamente";
     }
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/project/borrar/{id}")
