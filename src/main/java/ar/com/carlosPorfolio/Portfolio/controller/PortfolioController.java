@@ -13,6 +13,8 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -167,7 +169,11 @@ public class PortfolioController {
 
         About aboutResult = interAbout.findAbout(id);
 
-        aboutResult.setAbout(about);
+        //voy a probar codificar y decodificar el string para que puedan entrar caracteres especiales
+
+        String decoded = URLDecoder.decode(about, StandardCharsets.UTF_8);
+
+        aboutResult.setAbout(decoded);
 
         interAbout.saveAbout(aboutResult);
 
