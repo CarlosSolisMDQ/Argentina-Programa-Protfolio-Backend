@@ -168,10 +168,14 @@ public class PortfolioController {
     public About editAbout(@PathVariable Long id, @RequestParam ("about") String about){
 
         About aboutResult = interAbout.findAbout(id);
-
+        String decoded = "";
         //voy a probar codificar y decodificar el string para que puedan entrar caracteres especiales
+        try{
+            decoded = (String)URLDecoder.decode(about, "UTF-8");
+        }catch(Exception e){
+            decoded = "error en la conversion decodificacion del String";
+        }
 
-        String decoded = URLDecoder.decode(about, StandardCharsets.UTF_8);
 
         aboutResult.setAbout(decoded);
 
